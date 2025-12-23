@@ -1,27 +1,39 @@
 import { useState } from "react";
 import InputForm from "../components/InputForm";
 import WorkoutPlan from "../components/WorkoutPlan";
+import { api } from "../services/api";
 
 export default function Home() {
   const [plan, setPlan] = useState(null);
   const [daysPerWeek, setDaysPerWeek] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const generatePlan = async (formData) => {
-    setDaysPerWeek(Number(formData.days));
+    try {
+      setLoading(true);
+      setError("");
+      setDaysPerWeek(Number(formData.days));
 
-    const res = await fetch("http://localhost:8000/predict", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
+      // ✅ CORRECT API CALL (uses Render backend)
+      const res = await api.post("/predict/", formData);
 
-    const result = await res.json();
-    setPlan(result);
+      setPlan(res.data);
+    } catch (err) {
+      console.error(err);
+      setError("Failed to generate workout plan. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
       <InputForm onSubmit={generatePlan} />
+
+      {loading && <p style={{ textAlign: "center" }}>Generating workout...</p>}
+      {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
+
       <WorkoutPlan plan={plan} daysPerWeek={daysPerWeek} />
     </>
   );
