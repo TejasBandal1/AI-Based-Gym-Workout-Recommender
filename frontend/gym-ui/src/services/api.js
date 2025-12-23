@@ -1,5 +1,8 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://gym-ai-backend.onrender.com",
+  baseURL: "https://gym-ai-backend-tg6k.onrender.com",
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
