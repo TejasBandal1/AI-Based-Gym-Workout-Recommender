@@ -1,0 +1,179 @@
+/* =========================
+   POLISHED WORKOUT PLAN UI
+   ========================= */
+
+.workout-card {
+  background: linear-gradient(180deg, #020617, #020617);
+}
+
+/* Header */
+.workout-header {
+  margin-bottom: 2.2rem;
+}
+
+.workout-header h2 {
+  font-size: 2.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.workout-meta {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+/* Day block */
+.day-block {
+  margin-top: 3rem;
+}
+
+.day-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #1e293b;
+}
+
+/* Section block */
+.section-block {
+  margin-top: 1.6rem;
+  padding-left: 0.4rem;
+}
+
+.section-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #60a5fa;
+  margin-bottom: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Exercise list */
+.exercise-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Exercise card */
+.exercise-card {
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border 0.2s ease, transform 0.15s ease;
+}
+
+.exercise-card:hover {
+  border-color: #6366f1;
+  transform: translateY(-1px);
+}
+
+.exercise-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.exercise-details {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.exercise-details .weight {
+  margin-left: 0.5rem;
+  color: #a5b4fc;
+  font-weight: 500;
+}
+
+/* Text-only items (Warm-up, Finisher) */
+.text-item {
+  font-size: 0.9rem;
+  color: #e5e7eb;
+  padding-left: 0.6rem;
+  position: relative;
+}
+
+.text-item::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #60a5fa;
+}
+/* =========================
+   DAY LEVEL STRUCTURE
+   ========================= */
+
+.day-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.day-badge {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.day-subtitle {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-top: 0.2rem;
+}
+/* =========================
+   WEEKLY CALENDAR & UX
+   ========================= */
+
+.start-day-toggle {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.start-day-toggle button {
+  padding: 0.3rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #1e293b;
+  background: #020617;
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+.start-day-toggle button.active {
+  background: #6366f1;
+  border-color: #6366f1;
+}
+
+.progression-note {
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  border-left: 4px solid #6366f1;
+  background: #020617;
+  font-size: 0.9rem;
+  color: #e5e7eb;
+}
+
+.rest-day {
+  opacity: 0.7;
+}
+
+.rest-text {
+  font-style: italic;
+  color: #94a3b8;
+}
