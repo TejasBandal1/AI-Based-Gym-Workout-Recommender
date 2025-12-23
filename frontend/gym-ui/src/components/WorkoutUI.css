@@ -288,6 +288,75 @@ select:focus {
 
 
 
+/* =========================
+   PDF MODE (EXPORT ONLY)
+   Mobile-friendly & Clean
+   ========================= */
+
+.pdf-mode {
+  max-width: 100% !important;
+}
+
+/* Typography scaling for PDF */
+.pdf-mode h2 {
+  font-size: 1.6rem;
+}
+
+.pdf-mode h3 {
+  font-size: 1.3rem;
+}
+
+.pdf-mode p,
+.pdf-mode span,
+.pdf-mode div {
+  font-size: 0.9rem;
+}
+
+/* One day = one clean section */
+.pdf-mode .day-card {
+  page-break-inside: avoid;
+  margin-bottom: 1.8rem;
+  padding: 1.6rem;
+  border-radius: 16px;
+}
+
+/* Clear day separation */
+.pdf-mode .day-card:not(:last-child) {
+  border-bottom: 2px solid #1e293b;
+}
+
+/* Section spacing */
+.pdf-mode .section {
+  margin-top: 1.4rem;
+}
+
+/* Exercise layout stacked */
+.pdf-mode .exercise-row {
+  gap: 0.5rem;
+}
+
+/* Chips wrap nicely on mobile */
+.pdf-mode .exercise-breakdown {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Slightly bigger chips */
+.pdf-mode .exercise-breakdown span {
+  font-size: 0.85rem;
+  padding: 0.45rem 0.7rem;
+}
+
+/* Hide buttons in PDF */
+.pdf-mode .primary-btn {
+  display: none !important;
+}
+
+/* Remove shadows for clean print */
+.pdf-mode .card,
+.pdf-mode .day-card {
+  box-shadow: none !important;
+}
 
 
 

@@ -1,6 +1,6 @@
 import "./WorkoutUI.css";
-import html2pdf from "html2pdf.js";
 import { useRef } from "react";
+import html2pdf from "html2pdf.js/dist/html2pdf.min.js";
 
 const DAYS = [
   "Monday",
@@ -44,13 +44,17 @@ export default function WorkoutPlan({ plan, daysPerWeek }) {
   const downloadPDF = () => {
     const element = pdfRef.current;
 
+    // Enable PDF styling
+    element.classList.add("pdf-mode");
+
     const options = {
-      margin: 0.4,
+      margin: 0.5,
       filename: `Workout_Plan_${plan.split}.pdf`,
       image: { type: "jpeg", quality: 0.98 },
       html2canvas: {
         scale: 2,
         useCORS: true,
+        backgroundColor: "#020617",
       },
       jsPDF: {
         unit: "in",
@@ -59,12 +63,19 @@ export default function WorkoutPlan({ plan, daysPerWeek }) {
       },
     };
 
-    html2pdf().set(options).from(element).save();
+    html2pdf()
+      .set(options)
+      .from(element)
+      .save()
+      .then(() => {
+        // Remove PDF styling after export
+        element.classList.remove("pdf-mode");
+      });
   };
 
   return (
     <div className="card workout-card">
-      {/* HEADER + DOWNLOAD */}
+      {/* HEADER */}
       <div className="workout-header spaced">
         <div>
           <h2>{plan.split} Training Plan</h2>
@@ -78,7 +89,7 @@ export default function WorkoutPlan({ plan, daysPerWeek }) {
         </button>
       </div>
 
-      {/* THIS PART WILL BE CONVERTED TO PDF */}
+      {/* CONTENT TO EXPORT */}
       <div ref={pdfRef}>
         <div className="week-grid">
           {weeklySchedule.map(({ day, workout }, idx) => {
