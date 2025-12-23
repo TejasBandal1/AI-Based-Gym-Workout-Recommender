@@ -28,17 +28,35 @@ export default function InputForm({ onSubmit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // -------- Validation --------
     if (!form.age || !form.weight || !form.height || !form.days) {
       setError("Please fill all required fields.");
       return;
     }
 
-    if (form.days < 1 || form.days > 7) {
+    if (Number(form.days) < 1 || Number(form.days) > 7) {
       setError("Workout days must be between 1 and 7.");
       return;
     }
 
-    onSubmit(form);
+    // -------- IMPORTANT FIX --------
+    // Convert numeric fields from string → number
+    const payload = {
+      age: Number(form.age),
+      weight: Number(form.weight),
+      height: Number(form.height),
+      body_fat_category: form.body_fat_category,
+      goal: form.goal,
+      experience: form.experience,
+      training_age_years: Number(form.training_age_years || 0),
+      days: Number(form.days),
+      progress_feedback: form.progress_feedback,
+      recovery_score: form.recovery_score,
+      cardio_preference: form.cardio_preference,
+      core_focus: form.core_focus,
+    };
+
+    onSubmit(payload);
   };
 
   return (
@@ -53,36 +71,75 @@ export default function InputForm({ onSubmit }) {
         <Field label="Weight (kg)" name="weight" value={form.weight} onChange={handleChange} />
         <Field label="Height (meters)" name="height" value={form.height} onChange={handleChange} />
 
-        <Select label="Body Fat Level" name="body_fat_category" value={form.body_fat_category}
-          onChange={handleChange} options={["low", "medium", "high"]} />
+        <Select
+          label="Body Fat Level"
+          name="body_fat_category"
+          value={form.body_fat_category}
+          onChange={handleChange}
+          options={["low", "medium", "high"]}
+        />
 
-        <Select label="Goal" name="goal" value={form.goal}
-          onChange={handleChange} options={["muscle_gain", "weight_loss"]} />
+        <Select
+          label="Goal"
+          name="goal"
+          value={form.goal}
+          onChange={handleChange}
+          options={["muscle_gain", "weight_loss"]}
+        />
 
-        <Select label="Experience Level" name="experience" value={form.experience}
-          onChange={handleChange} options={["beginner", "intermediate", "advanced"]} />
+        <Select
+          label="Experience Level"
+          name="experience"
+          value={form.experience}
+          onChange={handleChange}
+          options={["beginner", "intermediate", "advanced"]}
+        />
 
-        <Field label="Training Age (years)" name="training_age_years"
-          value={form.training_age_years} onChange={handleChange} />
+        <Field
+          label="Training Age (years)"
+          name="training_age_years"
+          value={form.training_age_years}
+          onChange={handleChange}
+        />
 
-        <Field label="Workout Days / Week" name="days"
-          value={form.days} onChange={handleChange} />
+        <Field
+          label="Workout Days / Week"
+          name="days"
+          value={form.days}
+          onChange={handleChange}
+        />
 
-        <Select label="Progress Feedback" name="progress_feedback"
-          value={form.progress_feedback} onChange={handleChange}
-          options={["new", "poor", "good", "excellent", "easy"]} />
+        <Select
+          label="Progress Feedback"
+          name="progress_feedback"
+          value={form.progress_feedback}
+          onChange={handleChange}
+          options={["new", "poor", "good", "excellent", "easy"]}
+        />
 
-        <Select label="Recovery Quality" name="recovery_score"
-          value={form.recovery_score} onChange={handleChange}
-          options={["poor", "average", "good"]} />
+        <Select
+          label="Recovery Quality"
+          name="recovery_score"
+          value={form.recovery_score}
+          onChange={handleChange}
+          options={["poor", "average", "good"]}
+        />
 
-        <Select label="Cardio Preference" name="cardio_preference"
-          value={form.cardio_preference} onChange={handleChange}
-          options={["low", "moderate", "high"]} />
+        <Select
+          label="Cardio Preference"
+          name="cardio_preference"
+          value={form.cardio_preference}
+          onChange={handleChange}
+          options={["low", "moderate", "high"]}
+        />
 
-        <Select label="Core Focus" name="core_focus"
-          value={form.core_focus} onChange={handleChange}
-          options={["low", "moderate", "high"]} />
+        <Select
+          label="Core Focus"
+          name="core_focus"
+          value={form.core_focus}
+          onChange={handleChange}
+          options={["low", "moderate", "high"]}
+        />
 
         {error && <p className="error">{error}</p>}
 
