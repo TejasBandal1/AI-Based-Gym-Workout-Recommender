@@ -39,27 +39,32 @@ export default function WorkoutPlan({ plan, daysPerWeek }) {
   });
 
   /* =========================
-     PDF DOWNLOAD HANDLER
+     DOWNLOAD PDF (FULL COLOR)
      ========================= */
   const downloadPDF = () => {
     const element = pdfRef.current;
 
-    // Enable PDF styling
+    // Enable PDF mode
     element.classList.add("pdf-mode");
 
     const options = {
-      margin: 0.5,
+      margin: 0,
       filename: `Workout_Plan_${plan.split}.pdf`,
-      image: { type: "jpeg", quality: 0.98 },
+      image: {
+        type: "jpeg",
+        quality: 1,
+      },
       html2canvas: {
         scale: 2,
         useCORS: true,
-        backgroundColor: "#020617",
+        backgroundColor: "#020617", // 🔥 force dark theme
+        letterRendering: true,
       },
       jsPDF: {
         unit: "in",
         format: "a4",
         orientation: "portrait",
+        compressPDF: false, // 🔥 prevents dull colors
       },
     };
 
@@ -68,7 +73,6 @@ export default function WorkoutPlan({ plan, daysPerWeek }) {
       .from(element)
       .save()
       .then(() => {
-        // Remove PDF styling after export
         element.classList.remove("pdf-mode");
       });
   };
@@ -89,7 +93,7 @@ export default function WorkoutPlan({ plan, daysPerWeek }) {
         </button>
       </div>
 
-      {/* CONTENT TO EXPORT */}
+      {/* PDF CONTENT */}
       <div ref={pdfRef}>
         <div className="week-grid">
           {weeklySchedule.map(({ day, workout }, idx) => {
@@ -132,7 +136,6 @@ export default function WorkoutPlan({ plan, daysPerWeek }) {
                               <span>
                                 <strong>Sets:</strong> {item.sets}
                               </span>
-
                               <span>
                                 <strong>Reps:</strong> {item.reps}
                               </span>

@@ -358,5 +358,54 @@ select:focus {
   box-shadow: none !important;
 }
 
+/* =========================
+   PDF COLOR PRESERVATION
+   KEEP UI COLORS IN PDF
+   ========================= */
+
+.pdf-mode {
+  background: #020617 !important;
+  color: #e5e7eb !important;
+
+  /* 🔥 THIS IS CRITICAL */
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+/* Force dark cards */
+.pdf-mode .card,
+.pdf-mode .day-card {
+  background: #020617 !important;
+  border: 1px solid #1e293b !important;
+}
+
+/* Keep gradient pill colors */
+.pdf-mode .day-pill {
+  background: linear-gradient(135deg, #6366f1, #4f46e5) !important;
+  color: #ffffff !important;
+}
+
+/* Keep section headers blue */
+.pdf-mode .section h4 {
+  color: #60a5fa !important;
+}
+
+/* Keep chip backgrounds & borders */
+.pdf-mode .exercise-breakdown span {
+  background: #020617 !important;
+  border: 1px solid #1e293b !important;
+  color: #e5e7eb !important;
+}
+
+/* Per-set weight highlight chips */
+.pdf-mode .weight-multi em {
+  background: rgba(99, 102, 241, 0.18) !important;
+  color: #c7d2fe !important;
+}
+
+/* Rest day still visible */
+.pdf-mode .day-card.rest {
+  opacity: 0.75 !important;
+}
 
 
