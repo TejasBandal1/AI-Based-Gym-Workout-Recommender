@@ -15,13 +15,10 @@ export default function Home() {
       setError("");
       setDaysPerWeek(Number(formData.days));
 
-      // ✅ CORRECT API CALL (uses Render backend)
       const res = await api.post("/predict/", formData);
-
       setPlan(res.data);
     } catch (err) {
-      console.error(err);
-      setError("Failed to generate workout plan. Please try again.");
+      setError("Failed to generate workout plan.");
     } finally {
       setLoading(false);
     }
@@ -31,8 +28,14 @@ export default function Home() {
     <>
       <InputForm onSubmit={generatePlan} />
 
-      {loading && <p style={{ textAlign: "center" }}>Generating workout...</p>}
-      {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
+      {loading && (
+        <div className="loading-state">
+          <div className="spinner"></div>
+          <p>Building your personalized workout 💪</p>
+        </div>
+      )}
+
+      {error && <p className="error center">{error}</p>}
 
       <WorkoutPlan plan={plan} daysPerWeek={daysPerWeek} />
     </>

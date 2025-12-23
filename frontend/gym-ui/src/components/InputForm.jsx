@@ -28,7 +28,6 @@ export default function InputForm({ onSubmit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // -------- Validation --------
     if (!form.age || !form.weight || !form.height || !form.days) {
       setError("Please fill all required fields.");
       return;
@@ -39,8 +38,6 @@ export default function InputForm({ onSubmit }) {
       return;
     }
 
-    // -------- IMPORTANT FIX --------
-    // Convert numeric fields from string → number
     const payload = {
       age: Number(form.age),
       weight: Number(form.weight),
@@ -61,90 +58,63 @@ export default function InputForm({ onSubmit }) {
 
   return (
     <div className="card">
-      <h1 className="title">Personalized Workout Generator</h1>
-      <p className="subtitle">
-        Fill your fitness details and get a smart AI-based workout plan
-      </p>
+      <h1 className="title">AI Workout Generator</h1>
+      <p className="subtitle">Science-based workouts tailored to your body & goals</p>
 
       <form className="form-grid" onSubmit={handleSubmit}>
-        <Field label="Age" name="age" value={form.age} onChange={handleChange} />
-        <Field label="Weight (kg)" name="weight" value={form.weight} onChange={handleChange} />
-        <Field label="Height (meters)" name="height" value={form.height} onChange={handleChange} />
 
-        <Select
-          label="Body Fat Level"
-          name="body_fat_category"
-          value={form.body_fat_category}
-          onChange={handleChange}
-          options={["low", "medium", "high"]}
-        />
+        <div className="form-section">
+          <h3>👤 Body Metrics</h3>
+          <p className="section-hint">Used to calculate volume and load</p>
 
-        <Select
-          label="Goal"
-          name="goal"
-          value={form.goal}
-          onChange={handleChange}
-          options={["muscle_gain", "weight_loss"]}
-        />
+          <Field label="Age" name="age" value={form.age} onChange={handleChange} />
+          <Field label="Weight (kg)" name="weight" value={form.weight} onChange={handleChange} />
+          <Field label="Height (meters)" name="height" value={form.height} onChange={handleChange} />
+        </div>
 
-        <Select
-          label="Experience Level"
-          name="experience"
-          value={form.experience}
-          onChange={handleChange}
-          options={["beginner", "intermediate", "advanced"]}
-        />
+        <div className="form-section">
+          <h3>🎯 Goal</h3>
 
-        <Field
-          label="Training Age (years)"
-          name="training_age_years"
-          value={form.training_age_years}
-          onChange={handleChange}
-        />
+          <Select label="Primary Goal" name="goal" value={form.goal} onChange={handleChange}
+            options={["muscle_gain", "weight_loss"]} />
 
-        <Field
-          label="Workout Days / Week"
-          name="days"
-          value={form.days}
-          onChange={handleChange}
-        />
+          <Select label="Body Fat Level" name="body_fat_category" value={form.body_fat_category}
+            onChange={handleChange} options={["low", "medium", "high"]} />
+        </div>
 
-        <Select
-          label="Progress Feedback"
-          name="progress_feedback"
-          value={form.progress_feedback}
-          onChange={handleChange}
-          options={["new", "poor", "good", "excellent", "easy"]}
-        />
+        <div className="form-section">
+          <h3>💪 Training Background</h3>
 
-        <Select
-          label="Recovery Quality"
-          name="recovery_score"
-          value={form.recovery_score}
-          onChange={handleChange}
-          options={["poor", "average", "good"]}
-        />
+          <Select label="Experience Level" name="experience" value={form.experience}
+            onChange={handleChange} options={["beginner", "intermediate", "advanced"]} />
 
-        <Select
-          label="Cardio Preference"
-          name="cardio_preference"
-          value={form.cardio_preference}
-          onChange={handleChange}
-          options={["low", "moderate", "high"]}
-        />
+          <Field label="Training Age (years)" name="training_age_years"
+            value={form.training_age_years} onChange={handleChange} />
 
-        <Select
-          label="Core Focus"
-          name="core_focus"
-          value={form.core_focus}
-          onChange={handleChange}
-          options={["low", "moderate", "high"]}
-        />
+          <Field label="Workout Days / Week" name="days"
+            value={form.days} onChange={handleChange} />
+        </div>
+
+        <div className="form-section">
+          <h3>⚙️ Preferences</h3>
+
+          <Select label="Recovery Quality" name="recovery_score"
+            value={form.recovery_score} onChange={handleChange}
+            options={["poor", "average", "good"]} />
+
+          <Select label="Cardio Preference" name="cardio_preference"
+            value={form.cardio_preference} onChange={handleChange}
+            options={["low", "moderate", "high"]} />
+
+          <Select label="Core Focus" name="core_focus"
+            value={form.core_focus} onChange={handleChange}
+            options={["low", "moderate", "high"]} />
+        </div>
 
         {error && <p className="error">{error}</p>}
 
-        <button className="primary-btn" type="submit">
-          Generate Workout Plan
+        <button className="primary-btn large" type="submit">
+          🔥 Generate My AI Workout
         </button>
       </form>
     </div>
